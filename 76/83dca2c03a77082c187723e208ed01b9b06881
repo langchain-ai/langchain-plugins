@@ -1,0 +1,64 @@
+plugins/langchain-mcp/.mcp.json
+  s_71e4d6791d7db0::t_c1a32ecb706b9b 1-12
+.github/workflows/ci.yml
+  s_71e4d6791d7db0::t_20510621a617a2 29-30
+  s_71e4d6791d7db0::t_a79e415384a75a 34-36,60-62
+  s_71e4d6791d7db0::t_9693b9eb33eeb6 37-59,72-95
+  s_71e4d6791d7db0::t_b12d481aed7a2b 64-66
+  s_71e4d6791d7db0::t_c9421df775f5c9 69-71
+  s_71e4d6791d7db0::t_086f6757586f4a 1-28,31-33,63,67-68
+.github/workflows/sync-upstream.yml
+  s_71e4d6791d7db0::t_c30809cbe93068 1-26,32-64
+  s_71e4d6791d7db0::t_c3bb0f26b328f1 27-31
+README.md
+  s_71e4d6791d7db0::t_9a517d00bdfc11 12-13,15-17,24,30,36,46,53,57,66,83-87
+  s_71e4d6791d7db0::t_2ca4ead6691c32 1-11,14,18-23,25-29,31-35,37-45,47-52,54-56,58-65,67-82,88-111
+plugins/langchain-mcp/.claude-plugin/plugin.json
+  s_71e4d6791d7db0::t_af65d473d5d1c9 1
+  s_71e4d6791d7db0::t_dd4b4ca6e1fd4e 3-5
+  s_71e4d6791d7db0::t_c4d8e4b9be5e7e 6-7
+  s_71e4d6791d7db0::t_9e7b6f64b48556 2
+plugins/langsmith-mcp/.codex-plugin/plugin.json
+  s_71e4d6791d7db0::t_a5878bb5261dad 1
+  s_71e4d6791d7db0::t_2fe97689476910 3-5
+  s_71e4d6791d7db0::t_3e2a1af581bfbb 6-7
+  s_71e4d6791d7db0::t_bb2b4619a83f39 2
+LICENSE
+  s_71e4d6791d7db0::t_c7f87a06ee46d5 1-21
+.claude-plugin/marketplace.json
+  s_71e4d6791d7db0::t_8725eeb5982a35 3-5
+  s_71e4d6791d7db0::t_a5f2e75c62ef36 1
+  s_71e4d6791d7db0::t_bf8a98a7a60f14 2
+  s_71e4d6791d7db0::t_d38853641b3ee9 6-43
+.gitignore
+  s_71e4d6791d7db0::t_93a5b6129065b8 19-29
+  s_71e4d6791d7db0::t_24d9403ebdc909 1-18
+plugins/langsmith-mcp/.mcp.json
+  s_71e4d6791d7db0::t_bc9c009c2b4aa0 1-9
+plugins/langsmith-mcp/.claude-plugin/plugin.json
+  s_71e4d6791d7db0::t_39c197e04bb37c 2
+  s_71e4d6791d7db0::t_485a41d2fd27b5 1
+  s_71e4d6791d7db0::t_7d02e745df7776 6-7
+  s_71e4d6791d7db0::t_03bfca49742d56 3-5
+plugins/langchain-mcp/.codex-plugin/plugin.json
+  s_71e4d6791d7db0::t_a12170838eafb0 1
+  s_71e4d6791d7db0::t_f809566d56bb78 2
+  s_71e4d6791d7db0::t_e6ee14d5ca9532 6-7
+  s_71e4d6791d7db0::t_6825aa86d9bb0d 3-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "7683dca2c03a77082c187723e208ed01b9b06881",
+  "prompts": {},
+  "sessions": {
+    "s_71e4d6791d7db0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5becdbab-1914-4166-bba6-a8e84342d176",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
