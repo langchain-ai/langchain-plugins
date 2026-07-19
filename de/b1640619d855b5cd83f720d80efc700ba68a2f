@@ -1,0 +1,59 @@
+.github/workflows/validate.yml
+  s_71e4d6791d7db0::t_78cd4b110bc6c2 74
+  s_71e4d6791d7db0::t_9ec546744a8462 20-25,34,41,49-51,54-59,61-71,75-77
+  s_71e4d6791d7db0::t_b12574af67e4f3 1-19,26-33,35-40,42-48,52-53,60,72-73,78-80
+.gitignore
+  s_71e4d6791d7db0::t_24d9403ebdc909 1-18
+  s_71e4d6791d7db0::t_93a5b6129065b8 19-29
+.github/workflows/sync-upstream.yml
+  s_71e4d6791d7db0::t_c30809cbe93068 1-61
+.claude-plugin/marketplace.json
+  s_71e4d6791d7db0::t_a5f2e75c62ef36 1
+  s_71e4d6791d7db0::t_bf8a98a7a60f14 2
+  s_71e4d6791d7db0::t_8725eeb5982a35 3-5
+  s_71e4d6791d7db0::t_d38853641b3ee9 6-43
+LICENSE
+  s_71e4d6791d7db0::t_c7f87a06ee46d5 1-21
+plugins/langchain-mcp/.codex-plugin/plugin.json
+  s_71e4d6791d7db0::t_6825aa86d9bb0d 3-5
+  s_71e4d6791d7db0::t_a12170838eafb0 1
+  s_71e4d6791d7db0::t_e6ee14d5ca9532 6-7
+  s_71e4d6791d7db0::t_f809566d56bb78 2
+plugins/langsmith-mcp/.claude-plugin/plugin.json
+  s_71e4d6791d7db0::t_485a41d2fd27b5 1
+  s_71e4d6791d7db0::t_7d02e745df7776 6-7
+  s_71e4d6791d7db0::t_39c197e04bb37c 2
+  s_71e4d6791d7db0::t_03bfca49742d56 3-5
+plugins/langchain-mcp/.mcp.json
+  s_71e4d6791d7db0::t_c1a32ecb706b9b 1-12
+plugins/langsmith-mcp/.codex-plugin/plugin.json
+  s_71e4d6791d7db0::t_2fe97689476910 3-5
+  s_71e4d6791d7db0::t_a5878bb5261dad 1
+  s_71e4d6791d7db0::t_bb2b4619a83f39 2
+  s_71e4d6791d7db0::t_3e2a1af581bfbb 6-7
+plugins/langchain-mcp/.claude-plugin/plugin.json
+  s_71e4d6791d7db0::t_af65d473d5d1c9 1
+  s_71e4d6791d7db0::t_9e7b6f64b48556 2
+  s_71e4d6791d7db0::t_c4d8e4b9be5e7e 6-7
+  s_71e4d6791d7db0::t_dd4b4ca6e1fd4e 3-5
+README.md
+  s_71e4d6791d7db0::t_2ca4ead6691c32 1-105
+plugins/langsmith-mcp/.mcp.json
+  s_71e4d6791d7db0::t_bc9c009c2b4aa0 1-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "deb1640619d855b5cd83f720d80efc700ba68a2f",
+  "prompts": {},
+  "sessions": {
+    "s_71e4d6791d7db0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5becdbab-1914-4166-bba6-a8e84342d176",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
