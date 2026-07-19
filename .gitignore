@@ -1,0 +1,29 @@
+# Secrets — never commit
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.jks
+credentials.json
+token.json
+.git-credentials
+
+# Dependencies / build artifacts
+node_modules/
+__pycache__/
+.venv/
+
+# macOS
+.DS_Store
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*~
+
+# Logs / scratch
+*.log

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "langchain-plugins",
+  "owner": {
+    "name": "LangChain",
+    "email": "support@langchain.dev"
+  },
+  "description": "LangChain ecosystem plugins for deepagents-code (dcode), Claude Code, and OpenAI Codex.",
+  "plugins": [
+    {
+      "name": "langchain-skills",
+      "source": {
+        "source": "github",
+        "repo": "langchain-ai/langchain-skills",
+        "ref": "v0.1.0"
+      },
+      "description": "Agent skills for building with LangChain, LangGraph, and Deep Agents (mirrored from langchain-ai/langchain-skills).",
+      "author": { "name": "LangChain" }
+    },
+    {
+      "name": "langsmith-skills",
+      "source": {
+        "source": "github",
+        "repo": "langchain-ai/langsmith-skills",
+        "ref": "v0.1.0"
+      },
+      "description": "Agent skills for tracing, datasets, and evaluation with LangSmith (mirrored from langchain-ai/langsmith-skills).",
+      "author": { "name": "LangChain" }
+    },
+    {
+      "name": "langchain-mcp",
+      "source": "./plugins/langchain-mcp",
+      "description": "LangChain Docs and Reference MCP servers for live documentation and API lookups.",
+      "author": { "name": "LangChain" }
+    },
+    {
+      "name": "langsmith-mcp",
+      "source": "./plugins/langsmith-mcp",
+      "description": "LangSmith remote MCP server (OAuth) for querying traces, datasets, prompts, and experiments.",
+      "author": { "name": "LangChain" }
+    }
+  ]
+}

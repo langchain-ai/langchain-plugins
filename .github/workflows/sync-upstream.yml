@@ -1,0 +1,64 @@
+name: sync-upstream-skills
+
+# Keep the github-sourced skill plugins pinned to the latest upstream release.
+# Runs daily; opens a PR whenever a new tag is available. Also runnable on demand.
+on:
+  schedule:
+    - cron: "0 9 * * *" # every day at 09:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump-refs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      - name: Bump upstream plugin refs to latest tags
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          manifest=".claude-plugin/marketplace.json"
+          changed=0
+          # Derive the github-sourced skill plugins straight from the manifest
+          # (objects skips local string sources), so adding one there needs no
+          # change here. Repo names have no spaces, so word-splitting is safe.
+          repos="$(jq -r '.plugins[] | .source | objects | select(.source == "github") | .repo' "$manifest")"
+          for full in $repos; do
+            latest="$(gh api "repos/${full}/tags" --jq '.[0].name // empty')"
+            if [ -z "$latest" ]; then
+              echo "No tags found for ${full}; skipping."
+              continue
+            fi
+            current="$(jq -r --arg r "$full" \
+              '.plugins[] | select((.source | objects | .repo) == $r) | .source.ref' "$manifest")"
+            if [ "$current" != "$latest" ]; then
+              echo "${full}: ${current} -> ${latest}"
+              jq --arg r "$full" --arg t "$latest" \
+                '(.plugins[] | select((.source | objects | .repo) == $r) | .source.ref) = $t' \
+                "$manifest" > "${manifest}.tmp" && mv "${manifest}.tmp" "$manifest"
+              changed=1
+            else
+              echo "${full}: already at ${latest}"
+            fi
+          done
+          echo "changed=${changed}" >> "$GITHUB_OUTPUT"
+        id: bump
+
+      - name: Open PR with the bumps
+        if: steps.bump.outputs.changed == '1'
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
+        with:
+          commit-message: "chore: bump upstream skill plugins to latest tags"
+          title: "chore: sync upstream skill plugins"
+          body: |
+            Automated bump of the `github`-sourced skill plugins in
+            `.claude-plugin/marketplace.json` to their latest upstream tags.
+
+            Review the diff and merge to update the marketplace.
+          branch: chore/sync-upstream-skills
+          delete-branch: true

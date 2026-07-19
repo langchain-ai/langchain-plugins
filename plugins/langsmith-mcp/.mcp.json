@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "langsmith": {
+      "type": "http",
+      "url": "https://api.smith.langchain.com/mcp",
+      "auth": "oauth"
+    }
+  }
+}

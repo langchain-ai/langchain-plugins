@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "langchain-mcp",
+  "version": "0.1.0",
+  "description": "LangChain Docs and Reference MCP servers for live documentation and API lookups.",
+  "author": { "name": "LangChain" }
+}

@@ -1,0 +1,95 @@
+name: CI
+
+# Validate the marketplace on every push and PR (including the daily sync bot's PRs).
+# Independent, deterministic gates — none needs any secret or API key.
+#
+# NOTE: the "JSON schema" and "claude plugin validate" job names are required
+# status-check contexts in the langchain-ai/deployments ruleset for this repo.
+# Renaming those jobs breaks the merge gate; keep the names byte-identical.
+on:
+  push:
+    branches: [main]
+  pull_request: {}
+
+permissions:
+  contents: read
+
+jobs:
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      # Prettier pinned via npx (mirrors the uvx pattern used below); Node is
+      # preinstalled on the runner, so no setup-node action is needed.
+      - name: Prettier check
+        run: npx --yes prettier@3.4.2 --check "**/*.{json,md,yml,yaml}"
+
+  schema:
+    name: JSON schema
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      # uv caches the check-jsonschema wheels across runs (enable-cache), so the
+      # tool isn't re-downloaded/built every time like `pipx run` would be.
+      - uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990 # v8.3.2
+        with:
+          enable-cache: true
+
+      - name: JSON syntax (all *.json)
+        run: |
+          set -euo pipefail
+          find . -name '*.json' -not -path './.git/*' -exec jq empty {} +
+
+      - name: marketplace.json vs schema
+        run: |
+          set -euo pipefail
+          uvx check-jsonschema \
+            --schemafile https://json.schemastore.org/claude-code-marketplace.json \
+            .claude-plugin/marketplace.json
+
+      - name: plugin.json manifests vs schema
+        run: |
+          set -euo pipefail
+          uvx check-jsonschema \
+            --schemafile https://json.schemastore.org/claude-code-plugin-manifest.json \
+            plugins/*/.claude-plugin/plugin.json \
+            plugins/*/.codex-plugin/plugin.json
+
+  plugin-validate:
+    name: claude plugin validate
+    runs-on: ubuntu-latest
+    env:
+      # Keep the cached binary put — don't let it auto-update mid-run (defeats the cache).
+      DISABLE_AUTOUPDATER: "1"
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      # Weekly-rotating key: matches the stable channel's ~1-week cadence, so the
+      # binary is re-downloaded at most once a week. Change %V->%j for a daily key.
+      - name: Compute cache key
+        id: key
+        run: echo "week=$(date -u +%G-w%V)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Claude Code CLI
+        id: claude-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            ~/.local/bin/claude
+            ~/.local/share/claude
+          key: claude-stable-${{ runner.os }}-${{ steps.key.outputs.week }}
+
+      - name: Install Claude Code CLI (stable)
+        if: steps.claude-cache.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          curl -fsSL https://claude.ai/install.sh | bash -s stable
+
+      - name: Add Claude to PATH
+        run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Validate marketplace & local plugins
+        run: claude plugin validate . --strict
