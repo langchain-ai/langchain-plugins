@@ -1,0 +1,20 @@
+.github/workflows/sync-upstream.yml
+  s_71e4d6791d7db0::t_14136cf0199686 41-48
+  s_71e4d6791d7db0::t_17039dc9e9fb36 3-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "3d11b61b3e743aa71fdba04237ab92e056f48b76",
+  "prompts": {},
+  "sessions": {
+    "s_71e4d6791d7db0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5becdbab-1914-4166-bba6-a8e84342d176",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Dariel Dato-on <293921406+darieldatoon@users.noreply.github.com>"
+    }
+  }
+}
