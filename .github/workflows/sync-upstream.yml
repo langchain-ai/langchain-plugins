@@ -1,7 +1,9 @@
 name: sync-upstream-skills
 
-# Keep the github-sourced skill plugins pinned to the latest upstream release.
-# Runs daily; opens a PR whenever a new tag is available. Also runnable on demand.
+# Keep github-sourced skill plugins that are PINNED TO A VERSION TAG up to date
+# with the latest upstream release. Sources tracking a branch (e.g. ref: main)
+# are left alone — that's a deliberate "always latest" choice by the maintainer.
+# Runs daily; opens a PR whenever a newer tag is available. Also runnable on demand.
 on:
   schedule:
     - cron: "0 9 * * *" # every day at 09:00 UTC
@@ -36,6 +38,14 @@ jobs:
             fi
             current="$(jq -r --arg r "$full" \
               '.plugins[] | select((.source | objects | .repo) == $r) | .source.ref' "$manifest")"
+            # Only maintain refs pinned to a version tag; leave branch refs
+            # (e.g. main) alone so we don't fight an intentional branch pin.
+            case "$current" in
+              v[0-9]*|[0-9]*.[0-9]*) : ;;
+              *)
+                echo "${full}: ref '${current}' is not a version tag; leaving as-is."
+                continue ;;
+            esac
             if [ "$current" != "$latest" ]; then
               echo "${full}: ${current} -> ${latest}"
               jq --arg r "$full" --arg t "$latest" \
