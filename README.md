@@ -5,7 +5,7 @@ Add it once, then install skills and MCP servers that help you build with
 LangChain, LangGraph, and Deep Agents — and observe and evaluate your apps with
 LangSmith.
 
-Works with **deepagents-code (`dcode`)**, **Claude Code**, and **OpenAI Codex**.
+Works with **[dcode]**, **Claude Code**, and **OpenAI Codex**.
 
 ## What's inside
 
@@ -20,7 +20,7 @@ Works with **deepagents-code (`dcode`)**, **Claude Code**, and **OpenAI Codex**.
 
 ### 1. Add the marketplace
 
-**deepagents-code (dcode)**
+**dcode**
 
 ```
 dcode plugin marketplace add langchain-ai/langchain-plugins
@@ -42,7 +42,7 @@ codex plugin marketplace add langchain-ai/langchain-plugins
 
 Plugin IDs use the form `plugin-name@langchain-plugins`. Install any subset:
 
-**deepagents-code (dcode)**
+**dcode**
 
 ```
 dcode plugin install langchain-skills@langchain-plugins
@@ -75,8 +75,8 @@ codex plugin add langsmith-mcp@langchain-plugins
 
 **Skills** activate automatically when your request matches what a skill covers —
 ask your agent to "build a LangGraph agent" or "help me set up a LangSmith eval"
-and the relevant skill kicks in. You can also invoke one explicitly (e.g. in
-`dcode`: `/skill:langchain-skills@langchain-plugins:langchain-rag`).
+and the relevant skill kicks in. You can also invoke one explicitly. With
+[dcode], run `/skill:langchain-skills@langchain-plugins:langchain-rag`.
 
 **MCP servers** become available once their plugin is enabled:
 
@@ -93,7 +93,7 @@ at your regional host per the
 
 ## Requirements
 
-- A supported agent CLI: deepagents-code, Claude Code, or OpenAI Codex.
+- A supported agent CLI: [dcode], Claude Code, or OpenAI Codex.
 - A [LangSmith account](https://smith.langchain.com) — only needed for the
   `langsmith-mcp` plugin.
 
@@ -105,7 +105,9 @@ published versions. Run your agent's marketplace **update** command periodically
 to pick up new releases:
 
 ```
-dcode plugin marketplace update langchain-plugins      # deepagents-code
+dcode plugin marketplace update langchain-plugins
 /plugin marketplace update langchain-plugins           # Claude Code
 codex plugin marketplace upgrade langchain-plugins     # OpenAI Codex
 ```
+
+[dcode]: https://docs.langchain.com/oss/python/deepagents/code/overview
