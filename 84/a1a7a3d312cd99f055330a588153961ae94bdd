@@ -1,0 +1,22 @@
+.claude-plugin/marketplace.json
+  s_41cff7e64be1ae::t_4c3347cc9df45b 23-24
+  s_41cff7e64be1ae::t_7e65dc08185eaf 13-14
+.github/workflows/sync-upstream.yml
+  s_41cff7e64be1ae::t_7f6fa14a1d9d36 29,31-55,61,64-68,70-72,76,78-80
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "84a1a7a3d312cd99f055330a588153961ae94bdd",
+  "prompts": {},
+  "sessions": {
+    "s_41cff7e64be1ae": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3b9589dd-9763-412c-98f3-c995f0feb050",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Dariel Dato-on <293921406+darieldatoon@users.noreply.github.com>"
+    }
+  }
+}
