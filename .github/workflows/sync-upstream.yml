@@ -26,36 +26,58 @@ jobs:
           set -euo pipefail
           manifest=".claude-plugin/marketplace.json"
           changed=0
-          # Derive the github-sourced skill plugins straight from the manifest
+          # Derive the remotely-sourced skill plugins straight from the manifest
           # (objects skips local string sources), so adding one there needs no
-          # change here. Repo names have no spaces, so word-splitting is safe.
-          repos="$(jq -r '.plugins[] | .source | objects | select(.source == "github") | .repo' "$manifest")"
-          for full in $repos; do
-            latest="$(gh api "repos/${full}/tags" --jq '.[0].name // empty')"
-            if [ -z "$latest" ]; then
-              echo "No tags found for ${full}; skipping."
-              continue
-            fi
-            current="$(jq -r --arg r "$full" \
-              '.plugins[] | select((.source | objects | .repo) == $r) | .source.ref' "$manifest")"
+          # change here. Emits "name<TAB>slug<TAB>ref" per plugin, normalizing
+          # both source shapes:
+          #   {"source":"github","repo":"owner/name"}
+          #   {"source":"url","url":"https://github.com/owner/name.git"}
+          # Entries are keyed by plugin name rather than repo, so the ref update
+          # works the same for either shape. Both branches validate before
+          # emitting: `url` sources must be on the github.com host, and every
+          # slug must match a strict charset — the slug is interpolated into a
+          # `gh api` path, and this workflow holds contents:write, so a crafted
+          # manifest entry must not be able to redirect or inject that call.
+          entries="$(jq -r '
+            .plugins[]
+            | . as $p
+            | $p.source
+            | objects
+            | if .source == "github" and (.repo | test("^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$"))
+                then [$p.name, .repo, (.ref // "")]
+              elif .source == "url" and (.url | test("^https://github\\.com/[A-Za-z0-9._-]+/[A-Za-z0-9._-]+(\\.git)?$"))
+                then [$p.name, (.url | sub("^https://github\\.com/"; "") | sub("\\.git$"; "")), (.ref // "")]
+              else empty
+              end
+            | @tsv
+          ' "$manifest")"
+          while IFS="$(printf '\t')" read -r name slug current; do
+            [ -n "$name" ] || continue
             # Only maintain refs pinned to a version tag; leave branch refs
             # (e.g. main) alone so we don't fight an intentional branch pin.
             case "$current" in
               v[0-9]*|[0-9]*.[0-9]*) : ;;
               *)
-                echo "${full}: ref '${current}' is not a version tag; leaving as-is."
+                echo "${name}: ref '${current}' is not a version tag; leaving as-is."
                 continue ;;
             esac
+            latest="$(gh api "repos/${slug}/tags" --jq '.[0].name // empty')"
+            if [ -z "$latest" ]; then
+              echo "No tags found for ${slug}; skipping."
+              continue
+            fi
             if [ "$current" != "$latest" ]; then
-              echo "${full}: ${current} -> ${latest}"
-              jq --arg r "$full" --arg t "$latest" \
-                '(.plugins[] | select((.source | objects | .repo) == $r) | .source.ref) = $t' \
+              echo "${name} (${slug}): ${current} -> ${latest}"
+              jq --arg n "$name" --arg t "$latest" \
+                '(.plugins[] | select(.name == $n) | .source.ref) = $t' \
                 "$manifest" > "${manifest}.tmp" && mv "${manifest}.tmp" "$manifest"
               changed=1
             else
-              echo "${full}: already at ${latest}"
+              echo "${name} (${slug}): already at ${latest}"
             fi
-          done
+          done <<EOF
+          $entries
+          EOF
           echo "changed=${changed}" >> "$GITHUB_OUTPUT"
         id: bump
 
