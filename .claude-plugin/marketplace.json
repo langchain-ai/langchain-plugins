@@ -10,8 +10,8 @@
     {
       "name": "langchain-skills",
       "source": {
-        "source": "github",
-        "repo": "langchain-ai/langchain-skills",
+        "source": "url",
+        "url": "https://github.com/langchain-ai/langchain-skills.git",
         "ref": "main"
       },
       "description": "Agent skills for building with LangChain, LangGraph, and Deep Agents (mirrored from langchain-ai/langchain-skills).",
@@ -20,8 +20,8 @@
     {
       "name": "langsmith-skills",
       "source": {
-        "source": "github",
-        "repo": "langchain-ai/langsmith-skills",
+        "source": "url",
+        "url": "https://github.com/langchain-ai/langsmith-skills.git",
         "ref": "main"
       },
       "description": "Agent skills for tracing, datasets, and evaluation with LangSmith (mirrored from langchain-ai/langsmith-skills).",
