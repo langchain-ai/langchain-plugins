@@ -32,7 +32,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/arbelonson-source/langchain-taskmarket.git",
-        "ref": "main"
+        "ref": "5ec885f3dfd125a3fc13de76d213331009579b58"
       },
       "description": "Human-authorized TaskMarket delegation tools for LangChain agents, with read-only defaults and spending limits.",
       "author": { "name": "Arbel Onson" }
