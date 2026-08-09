@@ -28,6 +28,16 @@
       "author": { "name": "LangChain" }
     },
     {
+      "name": "taskmarket-langchain",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/arbelonson-source/langchain-taskmarket.git",
+        "ref": "main"
+      },
+      "description": "Human-authorized TaskMarket delegation tools for LangChain agents, with read-only defaults and spending limits.",
+      "author": { "name": "Arbel Onson" }
+    },
+    {
       "name": "langchain-mcp",
       "source": "./plugins/langchain-mcp",
       "description": "LangChain Docs and Reference MCP servers for live documentation and API lookups.",

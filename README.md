@@ -9,12 +9,13 @@ Works with **[dcode]**, **Claude Code**, and **OpenAI Codex**.
 
 ## What's inside
 
-| Plugin                 | What you get                                                                                                                                   | Use it when                                                          |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| **`langchain-skills`** | Skills for building agents with LangChain, LangGraph, and Deep Agents — models, tools, RAG, streaming, middleware, persistence, HITL, and more | You're writing or debugging LangChain / LangGraph / Deep Agents code |
-| **`langsmith-skills`** | Skills for tracing, building datasets, and running evaluations with LangSmith                                                                  | You're debugging a run or setting up evals                           |
-| **`langchain-mcp`**    | Live **LangChain Docs** and **API Reference** MCP servers                                                                                      | You want your agent to look up current docs and API signatures       |
-| **`langsmith-mcp`**    | The **LangSmith** MCP server — query your traces, datasets, prompts, and experiments from your agent                                           | You want your agent to read your LangSmith workspace                 |
+| Plugin                     | What you get                                                                                                                                   | Use it when                                                          |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| **`langchain-skills`**     | Skills for building agents with LangChain, LangGraph, and Deep Agents — models, tools, RAG, streaming, middleware, persistence, HITL, and more | You're writing or debugging LangChain / LangGraph / Deep Agents code |
+| **`langsmith-skills`**     | Skills for tracing, building datasets, and running evaluations with LangSmith                                                                  | You're debugging a run or setting up evals                           |
+| **`taskmarket-langchain`** | A LangChain toolkit for delegating work through TaskMarket with exact-action approvals and spending limits                                     | Your agent should browse, create, or review competitive work         |
+| **`langchain-mcp`**        | Live **LangChain Docs** and **API Reference** MCP servers                                                                                      | You want your agent to look up current docs and API signatures       |
+| **`langsmith-mcp`**        | The **LangSmith** MCP server — query your traces, datasets, prompts, and experiments from your agent                                           | You want your agent to read your LangSmith workspace                 |
 
 ## Install
 
@@ -47,6 +48,7 @@ Plugin IDs use the form `plugin-name@langchain-plugins`. Install any subset:
 ```
 dcode plugin install langchain-skills@langchain-plugins
 dcode plugin install langsmith-skills@langchain-plugins
+dcode plugin install taskmarket-langchain@langchain-plugins
 dcode plugin install langchain-mcp@langchain-plugins
 dcode plugin install langsmith-mcp@langchain-plugins
 ```
@@ -58,6 +60,7 @@ Then run `/reload` or start a new session.
 ```
 /plugin install langchain-skills@langchain-plugins
 /plugin install langsmith-skills@langchain-plugins
+/plugin install taskmarket-langchain@langchain-plugins
 /plugin install langchain-mcp@langchain-plugins
 /plugin install langsmith-mcp@langchain-plugins
 ```
@@ -67,6 +70,7 @@ Then run `/reload` or start a new session.
 ```
 codex plugin add langchain-skills@langchain-plugins
 codex plugin add langsmith-skills@langchain-plugins
+codex plugin add taskmarket-langchain@langchain-plugins
 codex plugin add langchain-mcp@langchain-plugins
 codex plugin add langsmith-mcp@langchain-plugins
 ```
