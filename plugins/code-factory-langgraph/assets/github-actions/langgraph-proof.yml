@@ -1,0 +1,22 @@
+name: LangGraph resume proof
+
+on:
+  pull_request:
+    paths:
+      - ".factory/langgraph/**"
+      - "tests/**"
+
+permissions:
+  contents: read
+
+jobs:
+  replay-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: zrk222/code-factory@v0.39.0
+        with:
+          root: .
+          reference: .factory/langgraph/reference.json
+          resumed: .factory/langgraph/resumed.json
+          out: .factory/langgraph/assurance.json

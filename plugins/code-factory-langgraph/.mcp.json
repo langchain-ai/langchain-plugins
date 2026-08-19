@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "code-factory-langgraph": {
+      "command": "factory",
+      "args": ["mcp", "serve", "--root", "."]
+    }
+  }
+}

@@ -38,6 +38,12 @@
       "source": "./plugins/langsmith-mcp",
       "description": "LangSmith remote MCP server (OAuth) for querying traces, datasets, prompts, and experiments.",
       "author": { "name": "LangChain" }
+    },
+    {
+      "name": "code-factory-langgraph",
+      "source": "./plugins/code-factory-langgraph",
+      "description": "Proof-aware LangGraph guidance and read-only local resume-parity receipts for coding agents.",
+      "author": { "name": "Code Factory" }
     }
   ]
 }

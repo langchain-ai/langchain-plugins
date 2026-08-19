@@ -15,6 +15,7 @@ Works with **[dcode]**, **Claude Code**, and **OpenAI Codex**.
 | **`langsmith-skills`** | Skills for tracing, building datasets, and running evaluations with LangSmith                                                                  | You're debugging a run or setting up evals                           |
 | **`langchain-mcp`**    | Live **LangChain Docs** and **API Reference** MCP servers                                                                                      | You want your agent to look up current docs and API signatures       |
 | **`langsmith-mcp`**    | The **LangSmith** MCP server — query your traces, datasets, prompts, and experiments from your agent                                           | You want your agent to read your LangSmith workspace                 |
+| **`code-factory-langgraph`** | Proof-aware LangGraph guidance and read-only local resume-parity receipts                                                               | You want supplied sealed lineages compared before review             |
 
 ## Install
 
@@ -49,6 +50,7 @@ dcode plugin install langchain-skills@langchain-plugins
 dcode plugin install langsmith-skills@langchain-plugins
 dcode plugin install langchain-mcp@langchain-plugins
 dcode plugin install langsmith-mcp@langchain-plugins
+dcode plugin install code-factory-langgraph@langchain-plugins
 ```
 
 Then run `/reload` or start a new session.
@@ -60,6 +62,7 @@ Then run `/reload` or start a new session.
 /plugin install langsmith-skills@langchain-plugins
 /plugin install langchain-mcp@langchain-plugins
 /plugin install langsmith-mcp@langchain-plugins
+/plugin install code-factory-langgraph@langchain-plugins
 ```
 
 **OpenAI Codex** (note: Codex uses `add`, not `install`)
@@ -69,6 +72,7 @@ codex plugin add langchain-skills@langchain-plugins
 codex plugin add langsmith-skills@langchain-plugins
 codex plugin add langchain-mcp@langchain-plugins
 codex plugin add langsmith-mcp@langchain-plugins
+codex plugin add code-factory-langgraph@langchain-plugins
 ```
 
 ## Using the plugins
@@ -85,6 +89,7 @@ and the relevant skill kicks in. You can also invoke one explicitly. With
 | `langchain-docs`      | Live LangChain / LangGraph / LangSmith documentation           | None                          |
 | `langchain-reference` | Up-to-date API reference lookups                               | None                          |
 | `langsmith`           | Read access to your traces, datasets, prompts, and experiments | **LangSmith account** (OAuth) |
+| `code-factory-langgraph` | Read-only local Code Factory assurance facts for supplied sealed lineages | `factoryline-code-factory>=0.39.0` in the local Python environment |
 
 The **LangSmith** server signs in with OAuth — there are no API keys to paste.
 If your LangSmith workspace is in the EU, APAC, or AWS regions, point the server
@@ -96,6 +101,10 @@ at your regional host per the
 - A supported agent CLI: [dcode], Claude Code, or OpenAI Codex.
 - A [LangSmith account](https://smith.langchain.com) — only needed for the
   `langsmith-mcp` plugin.
+- `factoryline-code-factory>=0.39.0` — only needed for the
+  `code-factory-langgraph` plugin. It starts a local stdio MCP process and
+  never invokes a graph, mutates a checkpoint, replays effects, repairs code,
+  or authorizes a merge or deployment.
 
 ## Staying current
 
