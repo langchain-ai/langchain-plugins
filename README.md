@@ -100,14 +100,30 @@ at your regional host per the
 ## Staying current
 
 The skill plugins track their upstream LangChain releases and are refreshed
-automatically, so installing from this marketplace keeps you on the latest
-published versions. Run your agent's marketplace **update** command periodically
-to pick up new releases:
+automatically, so this marketplace always advertises the latest published
+versions. Updating the marketplace only refreshes that catalog. Your installed
+plugins stay on the version you installed until you update them too.
+
+**dcode** (no marketplace update command; re-running install pulls the latest)
 
 ```
-dcode plugin marketplace update langchain-plugins
-/plugin marketplace update langchain-plugins           # Claude Code
-codex plugin marketplace upgrade langchain-plugins     # OpenAI Codex
+dcode plugin install langchain-skills@langchain-plugins
 ```
+
+**Claude Code**
+
+```
+/plugin marketplace update langchain-plugins
+/plugin update langchain-skills@langchain-plugins
+```
+
+**OpenAI Codex** (note: Codex has no `plugin update`, so re-run `add`)
+
+```
+codex plugin marketplace upgrade langchain-plugins
+codex plugin add langchain-skills@langchain-plugins
+```
+
+Repeat the last command for each plugin you installed, then restart your agent.
 
 [dcode]: https://docs.langchain.com/oss/python/deepagents/code/overview
