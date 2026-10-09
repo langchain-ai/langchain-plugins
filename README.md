@@ -101,13 +101,14 @@ at your regional host per the
 
 The skill plugins track their upstream LangChain releases and are refreshed
 automatically, so installing from this marketplace keeps you on the latest
-published versions. Run your agent's marketplace **update** command periodically
-to pick up new releases:
+published versions. Claude Code and OpenAI Codex users can run their marketplace
+**update** commands periodically to pick up new releases:
 
 ```
-dcode plugin marketplace update langchain-plugins
 /plugin marketplace update langchain-plugins           # Claude Code
 codex plugin marketplace upgrade langchain-plugins     # OpenAI Codex
 ```
+
+[dcode] does not currently expose a marketplace update command.
 
 [dcode]: https://docs.langchain.com/oss/python/deepagents/code/overview
