@@ -18,16 +18,6 @@
       "author": { "name": "LangChain" }
     },
     {
-      "name": "langsmith-skills",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/langchain-ai/langsmith-skills.git",
-        "ref": "main"
-      },
-      "description": "Agent skills for tracing, datasets, and evaluation with LangSmith (mirrored from langchain-ai/langsmith-skills).",
-      "author": { "name": "LangChain" }
-    },
-    {
       "name": "langchain-mcp",
       "source": "./plugins/langchain-mcp",
       "description": "LangChain Docs and Reference MCP servers for live documentation and API lookups.",
